@@ -115,6 +115,70 @@ class Admin_class {
         $res = mysql_query($sql);
         return $res;
     }
+    
+    
+    public function get_medical_center_data($id) {
+        $sql = "select * from medical_center where id='$id'";
+
+        $res = mysql_query($sql);
+        $result=mysql_fetch_assoc($res);
+
+        return $result;
+    }
+    
+    public function update_medical_center($posted,$id){
+        $medical_center_name=$posted['medical_center_name'];
+        $medical_center_address=$posted['medical_center_address'];
+
+        $sql="UPDATE medical_center
+            SET medical_center_name='$medical_center_name',medical_center_address='$medical_center_address'
+            WHERE id='$id'";
+        $res=mysql_query($sql);
+
+        if($res){
+            $msg="Successfully Updated";
+            return $msg;
+        }
+        
+
+
+    }
+    
+    public function delete_medical_center($id){
+        $sql="DELETE FROM medical_center where id='$id'";
+        $res=mysql_query($sql);
+        header('location:medical_center_list.php');
+    }
+    
+    
+    public function get_department_data($id) {
+        $sql = "select * from department where id='$id'";
+
+        $res = mysql_query($sql);
+        $result=mysql_fetch_assoc($res);
+
+        return $result;
+    }
+    
+    public function update_department($posted,$id){
+        $department=$posted['department'];
+
+        $sql="UPDATE department
+            SET department='$department'
+            WHERE id='$id'";
+        $res=mysql_query($sql);
+
+        if($res){
+            $msg="Successfully Updated";
+            return $msg;
+        }
+    }
+    
+    public function delete_department($id) {
+       $sql="DELETE FROM department where id='$id'";
+       $res=  mysql_query($sql);
+       header('location:department_list.php');
+    }
 
     public function add_time($posted){
         $shift=$posted['shift'];
